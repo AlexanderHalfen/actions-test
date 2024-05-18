@@ -38,20 +38,33 @@ jobs:
     - name: Change to executable
       run: chmod +x gradlew
 
+    - name: Cache Gradle files
+      id: cache-gradle
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+    - name: Cache JAR file
+      id: cache-jar
+      uses: actions/cache@v2
+      with:
+        path: build/libs
+        key: jar-${{ runner.os }}-${{ hashFiles('build.gradle') }}
+
+
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+    - name: Save JAR to cache
+      if: steps.cache-jar.outputs.cache-hit != 'true'
+      uses: actions/cache@v2
       with:
-        name: demo-0.0.1-SNAPSHOT.jar
-        path: build/libs/*.jar
+        path: build/libs
+        key: jar-${{ runner.os }}-${{ hasFiles('build.gradle') }}
 
-#    - name: Save build artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: demo-0.0.1-SNAPSHOT
-#        path: build/libs/*.jar
 
     - name: Trigger Docker Task
       uses: peter-evans/repository-dispatch@v1
