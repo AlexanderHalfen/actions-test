@@ -45,14 +45,14 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        key: gradle-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
     - name: Cache JAR file
       id: cache-jar
       uses: actions/cache@v2
       with:
         path: build/libs
-        key: jar-${{ runner.os }}-${{ hashFiles('build.gradle') }}
+        key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
 
     - name: Build with Gradle Wrapper
@@ -63,7 +63,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: build/libs
-        key: jar-${{ runner.os }}-${{ hasFiles('build.gradle') }}
+        key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
 
     - name: Trigger Docker Task
