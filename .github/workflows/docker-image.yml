@@ -29,10 +29,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Get current date
-        run: echo "CURRENT_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+        run: echo "CURRENT_DATE=$(date +'%d%m%Y')" >> $GITHUB_ENV
 
       - name: Build the Docker image
         run: docker build . -t scoya/testimage:${{ env.CURRENT_DATE }}
 
       - name: Push Docker image
         run: docker push scoya/testimage:${{ env.CURRENT_DATE }}
+
