@@ -24,4 +24,4 @@ jobs:
 
 
       - name: Build the Docker image
-        run: docker build . --t my-image:latest
+        run: docker build . -t my-image:latest
