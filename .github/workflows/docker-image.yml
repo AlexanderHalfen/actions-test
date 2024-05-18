@@ -22,6 +22,14 @@ jobs:
           path: build/libs
           key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build . -t my-image:latest
+        run: docker build . -t testimage:latest
+
+      - name: Push Docker image
+        run: docker push testimage:latest
