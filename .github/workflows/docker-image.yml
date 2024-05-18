@@ -1,8 +1,10 @@
-name: Docker Image CI
+name: Docker
 
 on:
-  repository_dispatch:
-    types: [build_completed]
+  workflow_run:
+    workflows: ["Gradle"]
+    types:
+      - completed
 
 jobs:
 
