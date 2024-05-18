@@ -23,5 +23,5 @@ jobs:
           key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
 
-   # - name: Build the Docker image
-    #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Build the Docker image
+        run: docker build . --t my-image:latest
