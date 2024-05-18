@@ -41,11 +41,34 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Save build artifact
-      uses: actions/upload-artifact@v3
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.rep_token }}
       with:
-        name: demo-0.0.1-SNAPSHOT
-        path: build/libs/*.jar
+        tag_name: v1.0.0
+        release_name: Release v1.0.0
+        draft: false
+        prerelease: false
+
+    - name: Upload build artifact to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.rep_token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/libs/*.jar
+        asset_name: demo-0.0.1-SNAPSHOT.jar
+        asset_content_type: application/java-archive
+
+
+#    - name: Save build artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: demo-0.0.1-SNAPSHOT
+#        path: build/libs/*.jar
 
     - name: Trigger Docker Task
       uses: peter-evans/repository-dispatch@v1
