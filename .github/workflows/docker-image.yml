@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build . -t testimage:latest
+        run: docker build . -t scoya/testimage:latest
 
       - name: Push Docker image
-        run: docker push testimage:latest
+        run: docker push scoya/testimage:latest
