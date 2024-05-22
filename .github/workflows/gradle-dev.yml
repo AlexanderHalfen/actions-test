@@ -15,12 +15,7 @@ on:
 
 jobs:
   build:
-
-    strategy:
-      matrix:
-        environment: [ dev, main ]
-
-    environment: ${{ matrix.environment }}
+    environment: dev
 
     runs-on: ubuntu-latest
     permissions:
