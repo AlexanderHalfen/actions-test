@@ -65,6 +65,7 @@ jobs:
         path: build/libs
         key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
+    - run: echo ${{ secrets.TESTSECRET }}
 
     - name: Trigger Docker Task
       uses: peter-evans/repository-dispatch@v1

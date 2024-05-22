@@ -22,7 +22,7 @@ jobs:
           path: build/libs
           key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
-      - name: Login to DockerHub
+      - name: Login to Github
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
