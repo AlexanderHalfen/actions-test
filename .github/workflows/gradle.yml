@@ -65,7 +65,11 @@ jobs:
         path: build/libs
         key: jar-${{ runner.os }}-${{ hashFiles('**/build.gradle', '**/settings.gradle', '**/gradle.properties') }}
 
-    - run: echo "ENVTEST ${{ secrets.TESTSECRET }}"
+    - name: get env secret
+      env:
+        var_name: ${{ secrets.TESTSECRET }}
+      run: echo "The secret is $var_name and token is ${{ secrets.GITHUB_TOKEN }}"
+
 
     - name: Trigger Docker Task
       uses: peter-evans/repository-dispatch@v1
