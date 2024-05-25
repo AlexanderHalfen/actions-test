@@ -2,7 +2,7 @@ name: Docker
 
 on:
   workflow_run:
-    workflows: ["Gradle"]
+    workflows: ["Gradle-Prod", "Gradle-Dev"]
     types:
       - completed
 
