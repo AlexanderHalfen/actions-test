@@ -24,3 +24,23 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task buildDev {
+	doLast {
+		println 'Building for Development environment'
+		System.setProperty('spring.profiles.active', 'dev')
+		exec {
+			commandLine './gradlew', 'build'
+		}
+	}
+}
+
+task buildProd {
+	doLast {
+		println 'Building for Production environment'
+		System.setProperty('spring.profiles.active', 'prod')
+		exec {
+			commandLine './gradlew', 'build'
+		}
+	}
+}
