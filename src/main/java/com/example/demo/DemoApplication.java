@@ -19,7 +19,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-
+		System.out.println("Test");
 		// Your custom code here
 		System.out.println("Value: " + value);
 	}
